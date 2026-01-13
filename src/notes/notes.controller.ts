@@ -9,6 +9,7 @@ import {
   Query,
   UseGuards,
   UseInterceptors,
+  Req,
 } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { CreateNoteDto } from './dto/create-note.dto';
@@ -27,16 +28,16 @@ export class NotesController {
 
   @UseInterceptors(ResponseInterceptor)
   @Post()
-  create(@Body() dto: CreateNoteDto) {
-    return this.notesService.create(dto);
+  create(@Req() req, @Body() dto: CreateNoteDto) {
+    return this.notesService.create({ ...dto, userId: req.user.userId });
   }
 
   @UseInterceptors(ResponseInterceptor)
   @Get()
   @ApiQuery({ name: 'cursor', type: String, required: false })
   @ApiQuery({ name: 'limit', type: String, required: false })
-  findAll(@Query() paginationDto: PaginationDto) {
-    return this.notesService.findAll(paginationDto);
+  findAll(@Req() req, @Query() paginationDto: PaginationDto) {
+    return this.notesService.findAll(paginationDto, req.user.userId);
   }
 
   @UseInterceptors(ResponseInterceptor)

@@ -17,9 +17,11 @@ export class NotesService {
     return this.noteModel.create(dto);
   }
 
-  async findAll(paginationDto: PaginationDto) {
+  async findAll(paginationDto: PaginationDto, userId: string) {
     const { cursor, limit, categoryId } = paginationDto;
-    let filter: any = {};
+    const filter: any = {
+      userId,
+    };
     if (categoryId) {
       filter.categoryId = categoryId;
     }

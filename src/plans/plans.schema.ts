@@ -6,22 +6,22 @@ export type PlanDocument = Plan & Document;
 @Schema({ timestamps: true })
 export class Plan {
   @Prop({ required: true })
-  name: string; // Free | Pro | Unlimited
+  name: string;
 
   @Prop({ required: true })
   description: string;
 
   @Prop({ required: true })
-  amount: number; // 0 | 10 | 15
+  amount: number;
 
   @Prop({ required: true })
-  interval: string; // month | trial
+  interval: string;
 
   @Prop({ required: true })
-  todoLimit: number; // 5 | 50 | -1
+  todoLimit: number;
 
   @Prop({ required: true })
-  durationInDays: number; // 7 | 30
+  durationInDays: number;
 
   @Prop({ type: [String], default: [] })
   features: string[];
@@ -29,7 +29,8 @@ export class Plan {
   @Prop({ default: true })
   isActive: boolean;
 
-  @Prop({ required: false })
+  // Stripe price ID
+  @Prop()
   priceId?: string;
 }
 

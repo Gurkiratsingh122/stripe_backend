@@ -8,6 +8,9 @@ import { ConfigModule } from '@nestjs/config';
 import { CategoriesModule } from './categories/categories.module';
 import { NotesModule } from './notes/notes.module';
 import { PlansModule } from './plans/plans.module';
+import { SubscriptionsModule } from './subscriptions/subscriptions.module';
+import { StripeModule } from './stripe/stripe.module';
+import { StripeWebhookModule } from './webhooks/stripe/stripe-webhook.module';
 
 @Module({
   imports: [
@@ -22,6 +25,9 @@ import { PlansModule } from './plans/plans.module';
     CategoriesModule,
     NotesModule,
     PlansModule,
+    SubscriptionsModule,
+    StripeModule,
+    StripeWebhookModule,
   ],
   controllers: [AppController],
   providers: [AppService],
